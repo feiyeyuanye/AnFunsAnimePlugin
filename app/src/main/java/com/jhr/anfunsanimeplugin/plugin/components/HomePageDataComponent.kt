@@ -2,9 +2,9 @@ package com.jhr.anfunsanimeplugin.plugin.components
 
 import android.graphics.Color
 import android.graphics.Typeface
+import android.util.Log
 import android.view.Gravity
 import android.widget.ImageView
-import com.jhr.anfunsanimeplugin.plugin.actions.TodoAction
 import com.jhr.anfunsanimeplugin.plugin.components.Const.host
 import com.jhr.anfunsanimeplugin.plugin.components.Const.layoutSpanCount
 import com.jhr.anfunsanimeplugin.plugin.util.JsoupUtil
@@ -143,8 +143,8 @@ class HomePageDataComponent : IHomePageDataComponent {
                                         // 并不是跳转到详情页，而是这些页面
                                         // https://www.anfuns.cc/tdetail-7.html
                                         // https://www.anfuns.cc/tdetail-5.html
-                                        // 需要传递 url 到新的页面
-                                        action = TodoAction
+                                        action = CustomPageAction.obtain(TdetailPageDataComponent::class.java)
+                                        action?.extraData = videoUrl
                                     }else{
                                         action = DetailAction.obtain(videoUrl)
                                     }

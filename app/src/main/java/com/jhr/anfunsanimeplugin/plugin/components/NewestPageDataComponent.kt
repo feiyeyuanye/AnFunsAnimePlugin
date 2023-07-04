@@ -18,7 +18,9 @@ class NewestPageDataComponent : ICustomPageDataComponent {
     override val pageName: String
         get() = "最新"
 
-    override suspend fun getData(page: Int): List<BaseData> {
+    override suspend fun getData(page: Int): List<BaseData>? {
+        if (page != 1)
+            return null
         val hostUrl = Const.host + "/map.html"
         val document = JsoupUtil.getDocument(hostUrl)
 

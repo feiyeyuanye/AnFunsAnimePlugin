@@ -1,9 +1,8 @@
 package com.jhr.anfunsanimeplugin.plugin.components
 
-import com.jhr.anfunsanimeplugin.plugin.actions.TodoAction
 import com.jhr.anfunsanimeplugin.plugin.components.Const.layoutSpanCount
 import com.jhr.anfunsanimeplugin.plugin.util.JsoupUtil
-import com.su.mediabox.pluginapi.action.DetailAction
+import com.su.mediabox.pluginapi.action.CustomPageAction
 import com.su.mediabox.pluginapi.components.ICustomPageDataComponent
 import com.su.mediabox.pluginapi.data.BaseData
 import com.su.mediabox.pluginapi.data.MediaInfo1Data
@@ -18,7 +17,9 @@ class TopicPageDataComponent : ICustomPageDataComponent {
     override val pageName: String
         get() = "精彩专题"
 
-    override suspend fun getData(page: Int): List<BaseData> {
+    override suspend fun getData(page: Int): List<BaseData>? {
+        if (page != 1)
+            return null
         val hostUrl = Const.host + "/topic"
         val document = JsoupUtil.getDocument(hostUrl)
 
@@ -34,13 +35,12 @@ class TopicPageDataComponent : ICustomPageDataComponent {
             val item = MediaInfo1Data(
                 title, cover, Const.host + url,episode
             ).apply {
-                // 需要传递 url 到新的页面
-                action = TodoAction
+                action = CustomPageAction.obtain(TdetailPageDataComponent::class.java)
+                action?.extraData = url
             }
             data.add(item)
         }
         data[0].layoutConfig = BaseData.LayoutConfig(layoutSpanCount / 2)
         return data
     }
-
 }

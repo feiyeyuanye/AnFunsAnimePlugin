@@ -10,6 +10,7 @@ import com.jhr.anfunsanimeplugin.plugin.components.NewestPageDataComponent
 import com.jhr.anfunsanimeplugin.plugin.components.RankMonthPageDataComponent
 import com.jhr.anfunsanimeplugin.plugin.components.RankPageDataComponent
 import com.jhr.anfunsanimeplugin.plugin.components.RankWeekPageDataComponent
+import com.jhr.anfunsanimeplugin.plugin.components.TdetailPageDataComponent
 import com.jhr.anfunsanimeplugin.plugin.components.TopicPageDataComponent
 import com.jhr.anfunsanimeplugin.plugin.components.UpdateTablePageDataComponent
 import com.jhr.anfunsanimeplugin.plugin.components.VideoPlayPageDataComponent
@@ -50,7 +51,8 @@ class PluginFactory : IPluginFactory() {
         RankWeekPageDataComponent::class.java -> RankWeekPageDataComponent()
         UpdateTablePageDataComponent::class.java -> UpdateTablePageDataComponent()
         NewestPageDataComponent::class.java -> NewestPageDataComponent()  // 最新
-        TopicPageDataComponent::class.java -> TopicPageDataComponent()  // 专题
+        TopicPageDataComponent::class.java -> TopicPageDataComponent()  // 精彩专题
+        TdetailPageDataComponent::class.java -> TdetailPageDataComponent()  // 专题影片
         else -> null
     } as? T
 
