@@ -1,6 +1,5 @@
 package com.jhr.anfunsanimeplugin.plugin.components
 
-import com.jhr.anfunsanimeplugin.plugin.components.Const.host
 import com.jhr.anfunsanimeplugin.plugin.util.JsoupUtil
 import com.su.mediabox.pluginapi.action.CustomPageAction
 import com.su.mediabox.pluginapi.action.DetailAction
@@ -8,8 +7,6 @@ import com.su.mediabox.pluginapi.components.ICustomPageDataComponent
 import com.su.mediabox.pluginapi.data.BaseData
 import com.su.mediabox.pluginapi.data.MediaInfo1Data
 import com.su.mediabox.pluginapi.util.UIUtil.dp
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /**
  * FileName: TdetailPageDataComponent
@@ -28,18 +25,8 @@ class TdetailPageDataComponent : ICustomPageDataComponent {
         super.initPage(action)
         hostUrl += action.extraData
     }
-    /**
-     * 执行顺序：getData -》initPage
-     */
+
     override suspend fun getData(page: Int): List<BaseData>? {
-        // 相等则说明还没有得到传递过来的 url，重新执行 getData()，等待 initPage() 执行完毕。
-        if (hostUrl == host){
-            withContext(Dispatchers.IO) {
-//                Log.e("TAG","重新加载")
-                Thread.sleep(200)
-                getData(1)
-            }
-        }
         if (page != 1)
             return null
         val data = mutableListOf<BaseData>()
